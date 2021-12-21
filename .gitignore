@@ -2,6 +2,7 @@
 
 # static files
 static/
+certs/
 
 # virtualenv folder
 DASHENV/
@@ -10,7 +11,7 @@ DASHENV/
 config/config.cfg
 
 # ignore GeoLite DB
-data/GeoLite2-City*
+data/GeoLite2-*
 
 # Created by https://www.gitignore.io/api/python
 # Edit at https://www.gitignore.io/?templates=python
