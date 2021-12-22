@@ -468,6 +468,22 @@ def trendings():
             url_misp_event=url_misp_event
             )
 
+
+@app.route("/cliente_trendings")
+@login_required
+def cliente_trendings():
+    maxNum = request.args.get('maxNum')
+    try:
+        maxNum = int(maxNum)
+    except:
+        maxNum = 15
+    url_misp_event = cfg.get('RedisGlobal', 'misp_web_url')
+
+    return render_template('cliente_trendings.html',
+            maxNum=maxNum,
+            url_misp_event=url_misp_event
+            )
+
 ''' INDEX '''
 
 @app.route("/_logs")
@@ -830,6 +846,34 @@ def getTrendingTags():
 
 
     data = trendings_helper.getTrendingTags(dateS, dateE, topNum=int(request.args.get('topNum', 10)))
+    return jsonify(data)
+
+@app.route("/_getTrendingSectors")
+@login_required
+def getTrendingSectors():
+    try:
+        dateS = datetime.datetime.fromtimestamp(float(request.args.get('dateS')))
+        dateE = datetime.datetime.fromtimestamp(float(request.args.get('dateE')))
+    except:
+        dateS = datetime.datetime.now() - datetime.timedelta(days=7)
+        dateE = datetime.datetime.now()
+
+
+    data = trendings_helper.getTrendingSectors(dateS, dateE, topNum=int(request.args.get('topNum', 10)))
+    return jsonify(data)
+
+@app.route("/_getTrendingClientes")
+@login_required
+def getTrendingClientes():
+    try:
+        dateS = datetime.datetime.fromtimestamp(float(request.args.get('dateS')))
+        dateE = datetime.datetime.fromtimestamp(float(request.args.get('dateE')))
+    except:
+        dateS = datetime.datetime.now() - datetime.timedelta(days=7)
+        dateE = datetime.datetime.now()
+
+
+    data = trendings_helper.getTrendingClientes(dateS, dateE, topNum=int(request.args.get('topNum', 10)))
     return jsonify(data)
 
 @app.route("/_getTrendingSightings")

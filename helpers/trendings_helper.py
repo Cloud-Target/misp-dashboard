@@ -7,6 +7,7 @@ import os
 import random
 import sys
 import time
+from hashlib import md5
 from collections import OrderedDict
 
 import util
@@ -129,6 +130,54 @@ class Trendings_helper:
             keyname = "{}:{}".format(self.keyTag, util.getDateStrFormat(curDate))
             data = self.serv_redis_db.zrange(keyname, 0, topNum-1, desc=True, withscores=True)
             data = [ [record[0], record[1]] for record in data ]
+            data = data if data is not None else []
+            temp = []
+            for jText, score in data:
+                temp.append([json.loads(jText), score])
+            data = temp
+            to_ret.append([util.getTimestamp(curDate), data])
+        return to_ret
+
+    def getTrendingSectors(self, dateS, dateE, topNum=12):
+        to_ret = []
+        prev_days = (dateE - dateS).days
+        for curDate in util.getXPrevDaysSpan(dateE, prev_days):
+            keyname = "{}:{}".format(self.keyTag, util.getDateStrFormat(curDate))
+            data = self.serv_redis_db.zrange(keyname, 0, topNum-1, desc=True, withscores=True)
+            temp = []
+            for record in data:
+                info = json.loads(record[0])
+                if not "sector" in info['name']:
+                    pass
+                else:
+                    info['colour'] = "#" + md5(info['name'].encode("utf-8")).hexdigest()[-6:]
+                    temp.append([json.dumps(info), record[1]])
+            data = temp
+            #data = [ [record[0], record[1]] for record in data ]
+            data = data if data is not None else []
+            temp = []
+            for jText, score in data:
+                temp.append([json.loads(jText), score])
+            data = temp
+            to_ret.append([util.getTimestamp(curDate), data])
+        return to_ret
+
+    def getTrendingClientes(self, dateS, dateE, topNum=12):
+        to_ret = []
+        prev_days = (dateE - dateS).days
+        for curDate in util.getXPrevDaysSpan(dateE, prev_days):
+            keyname = "{}:{}".format(self.keyTag, util.getDateStrFormat(curDate))
+            data = self.serv_redis_db.zrange(keyname, 0, topNum-1, desc=True, withscores=True)
+            temp = []
+            for record in data:
+                info = json.loads(record[0])
+                if not "clientes-ct" in info['name']:
+                    pass
+                else:
+                    info['colour'] = "#" + md5(info['name'].encode("utf-8")).hexdigest()[-6:]
+                    temp.append([json.dumps(info), record[1]])
+            data = temp
+            #data = [ [record[0], record[1]] for record in data ]
             data = data if data is not None else []
             temp = []
             for jText, score in data:
