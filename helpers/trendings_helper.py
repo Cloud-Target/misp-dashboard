@@ -151,6 +151,10 @@ class Trendings_helper:
                     pass
                 else:
                     info['colour'] = "#" + md5(info['name'].encode("utf-8")).hexdigest()[-6:]
+                    # Enorme gambiarra para limpar o nome na tag
+                    a = info['name'].index('"') + 1
+                    b = info['name'].index('"', a)
+                    info['name'] = info['name'][a:b]
                     temp.append([json.dumps(info), record[1]])
             data = temp
             #data = [ [record[0], record[1]] for record in data ]
@@ -175,6 +179,10 @@ class Trendings_helper:
                     pass
                 else:
                     info['colour'] = "#" + md5(info['name'].encode("utf-8")).hexdigest()[-6:]
+                    # Enorme gambiarra para limpar o nome na tag
+                    a = info['name'].index('"') + 1
+                    b = info['name'].index('"', a)
+                    info['name'] = info['name'][a:b]
                     temp.append([json.dumps(info), record[1]])
             data = temp
             #data = [ [record[0], record[1]] for record in data ]
