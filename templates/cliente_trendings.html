@@ -106,7 +106,7 @@ small {
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0; padding-left: 15px;">
             <div class="navbar-header">
-                <img src="{{ url_for('static', filename='pics/MISP.png') }}" alt="MISP" style="float: left; height: 40px; margin-top: 5px;"><a class="navbar-brand dropdown-toggle" data-toggle="dropdown" href="#">MISP Trendings
+                <img src="{{ url_for('static', filename='pics/MISP.png') }}" alt="MISP" style="float: left; height: 40px; margin-top: 5px;"><a class="navbar-brand dropdown-toggle" data-toggle="dropdown" href="#">Clientes e Setores
                     <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                       <li><a href="{{ url_for('index') }}">Eventos ao vivo</a></li>
@@ -150,21 +150,7 @@ small {
                         <div class="col-lg-4">
                             <div class="panel panel-default" style="">
                                 <div class="panel-heading bg-info" style="font-weight: bold;">
-                                    <b>Eventos mais comuns</b>
-                                    <input type="text" id="typeaheadEvent" data-provide="typeahead" size="20" style="margin-bottom: 5px; float:right;" placeholder="Enter an event">
-                                </div>
-                                <div id="panelbody" class="panel-body" style="">
-                                    <div id="eventPie" style="width:100%; height: 34vh;"></div>
-                                    <div id="eventLine" style="width:100%; height: 27vh;"></div>
-                                </div>
-                            </div><!-- /.panel-body -->
-                        </div>
-
-                        <div class="col-lg-4">
-                            <div class="panel panel-default" style="">
-                                <div class="panel-heading bg-info" style="font-weight: bold;">
                                     <b>Ocorrências por cliente</b>
-                                    <input type="text" id="typeaheadCateg" data-provide="typeahead" size="20" style="margin-bottom: 5px; float:right;" placeholder="Enter a category">
                                 </div>
                                 <div id="panelbody" class="panel-body" style="">
                                     <div id="categPie" style="width:100%; height: 34vh;"></div>
@@ -177,7 +163,6 @@ small {
                             <div class="panel panel-default" style="">
                                 <div class="panel-heading bg-info" style="font-weight: bold;">
                                     <b>Ocorrências por setor</b>
-                                    <input type="text" id="typeaheadTag" data-provide="typeahead" size="20" style="margin-bottom: 5px; float:right;" placeholder="Enter a tag">
                                 </div>
                                 <div id="panelbody" class="panel-body" style="">
                                     <div id="tagPie" style="width:100%; height: 34vh;"></div>
@@ -186,6 +171,17 @@ small {
                             </div><!-- /.panel-body -->
                         </div>
 
+                        <div class="col-lg-4">
+                            <div class="panel panel-default" style="">
+                                <div class="panel-heading bg-info" style="font-weight: bold;">
+                                    <b>Eventos mais comuns</b>
+                                </div>
+                                <div id="panelbody" class="panel-body" style="">
+                                    <div id="eventPie" style="width:100%; height: 34vh;"></div>
+                                    <div id="eventLine" style="width:100%; height: 27vh;"></div>
+                                </div>
+                            </div><!-- /.panel-body -->
+                        </div>
 
                     <div class="col-lg-12">
                         <div class="panel panel-default" style="">
